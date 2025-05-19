@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "MySite: A Personal Flask Web Project with Email Verification"
+title: "PhyForum: A Personal Flask Web Project"
 date: 2025-05-18
 categories: [projects, flask]
 tags: [python, flask, web, personal-project]
 ---
 
-I’ve recently launched a small personal project called **PhyForum**, a web application built with Flask, MySQL, and Bootstrap. It’s currently under active development, and I'm excited to share its progress!
+I’ve recently launched a intricate personal project called **PhyForum**, a web application built with Flask, MySQL, and Bootstrap. It’s currently under active development, and I'm excited to share its progress!
 
 ## 🚀 Project Overview
 
