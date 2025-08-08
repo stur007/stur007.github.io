@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ page.title | default: site.title }}</title>
 
-<script>
+  <script>
     MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -22,9 +22,8 @@
     };
   </script>
   <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/tocbot@4/dist/tocbot.css" />
 
   <style>
     body {
@@ -35,6 +34,28 @@
       padding: 20px;
       background: #fafafa;
       color: #222;
+      display: flex;
+      gap: 20px;
+    }
+
+    #toc {
+      position: sticky;
+      top: 20px;
+      max-width: 250px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #fff;
+      padding: 1em;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.9em;
+      line-height: 1.4;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    #post-content {
+      flex: 1;
+      min-width: 0;
     }
 
     h1, h2, h3, h4 {
@@ -97,9 +118,46 @@
     a:hover {
       text-decoration: underline;
     }
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2em 0;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
   </style>
 </head>
 <body>
-  {{ content }}
+
+  {% unless page.url == "/" %}
+  <nav id="toc"></nav>
+  {% endunless %}
+
+  <main id="post-content">
+    {{ content }}
+  </main>
+
+  <script src="https://unpkg.com/tocbot@4/dist/tocbot.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init({
+        tocSelector: '#toc',
+        contentSelector: '#post-content',
+        headingSelector: 'h1, h2, h3, h4',
+        collapseDepth: 6,
+        scrollSmooth: true,
+      });
+    });
+  </script>
+
 </body>
 </html>

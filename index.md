@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-# Hi, I'm Yutong Ren👋
+# Hi, there👋
 
 Welcome to my personal website!  
 Here you'll find my blog posts, projects, and contact information.
