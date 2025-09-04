@@ -138,15 +138,17 @@
     /* Custom TOC Styling */
     #custom-toc {
       list-style: none;
+      padding-left: 0;
     }
 
     #custom-toc ul {
       list-style: none;
       padding-left: 15px;
+      margin: 0;
     }
 
     #custom-toc li {
-      margin: 8px 0;
+      margin: 6px 0;
       position: relative;
     }
 
@@ -155,9 +157,8 @@
       text-decoration: none;
       transition: var(--transition);
       display: block;
-      padding: 5px 0;
+      padding: 4px 0;
       border-left: 3px solid transparent;
-      padding-left: 10px;
     }
 
     #custom-toc a:hover {
@@ -170,6 +171,14 @@
       font-weight: 600;
       border-left-color: var(--primary-color);
     }
+
+    /* Different padding levels for heading hierarchy */
+    #custom-toc .toc-h1 { padding-left: 0px; font-weight: bold; }
+    #custom-toc .toc-h2 { padding-left: 15px; font-weight: 600; }
+    #custom-toc .toc-h3 { padding-left: 30px; }
+    #custom-toc .toc-h4 { padding-left: 45px; font-size: 0.95em; }
+    #custom-toc .toc-h5 { padding-left: 60px; font-size: 0.9em; }
+    #custom-toc .toc-h6 { padding-left: 75px; font-size: 0.85em; }
 
     /* Main Content Area */
     #post-content {
@@ -196,6 +205,7 @@
       margin-top: 1.5em;
       margin-bottom: 0.8em;
       color: var(--secondary-color);
+      scroll-margin-top: 20px;
     }
 
     h1 {
@@ -207,6 +217,26 @@
     h2 {
       border-left: 4px solid var(--primary-color);
       padding-left: 15px;
+    }
+
+    h3 {
+      border-left: 3px solid var(--accent-color);
+      padding-left: 20px;
+    }
+
+    h4 {
+      border-left: 2px solid #6ab0ff;
+      padding-left: 25px;
+    }
+
+    h5 {
+      border-left: 2px solid #a5caff;
+      padding-left: 30px;
+    }
+
+    h6 {
+      border-left: 2px dashed #a5caff;
+      padding-left: 35px;
     }
 
     /* Blockquotes */
@@ -507,7 +537,7 @@
       </ul>
       
       <div class="pagination">
-        <a href="{{ site.baseurl }}/archive">View all posts →</a>
+        <a href="{{ site.baseurl }}/posts">View all posts →</a>
       </div>
       
     {% else %}
@@ -551,8 +581,8 @@
         const tocContainer = document.getElementById('custom-toc');
         const headings = document.querySelectorAll('#post-content h1, #post-content h2, #post-content h3, #post-content h4, #post-content h5, #post-content h6');
         
-        // Only generate TOC if we're on a post page with headings
-        if (headings.length > 0 && !window.location.pathname.endsWith('/')) {
+        // Only generate TOC if we're on a post page with headings (not homepage)
+        if (headings.length > 0 && window.location.pathname !== '/' && !window.location.pathname.endsWith('/')) {
           let tocHtml = '';
           
           headings.forEach(heading => {
@@ -663,7 +693,7 @@
         }
       });
     });
-</script>
+  </script>
 
 </body>
 </html>
