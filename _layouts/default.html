@@ -239,6 +239,43 @@
       padding-left: 35px;
     }
 
+    /* Paragraphs and text content */
+    p {
+      margin-bottom: 1.2em;
+      max-width: 100%;
+    }
+
+    /* Image Styling - Match text width */
+    #post-content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Center aligned images */
+    .image-center {
+      text-align: center;
+      margin: 1.5em 0;
+    }
+
+    .image-center img {
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    /* Image captions */
+    .image-caption {
+      text-align: center;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-top: 0.5em;
+      margin-bottom: 1.5em;
+      font-size: 0.9em;
+    }
+
     /* Blockquotes */
     blockquote {
       border-left: 4px solid var(--primary-color);
@@ -555,6 +592,12 @@
         </div>
         
         {{ content }}
+        
+        <!-- Example image usage in Markdown -->
+        <!-- 
+          ![Image description](image.jpg)
+          _Caption for the image_
+        -->
       </article>
       
       <!-- Post Navigation -->
