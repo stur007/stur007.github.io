@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ page.title | default: site.title }}</title>
-
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  
+  <!-- MathJax Configuration -->
   <script>
     MathJax = {
       tex: {
@@ -23,72 +24,240 @@
   </script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/tocbot@4/dist/tocbot.css" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    :root {
+      --primary-color: #6ab0ff;
+      --secondary-color: #a5caff;
+      --accent-color: #ff7b72;
+      --dark-bg: #1a1a1a;
+      --darker-bg: #151515;
+      --card-bg: #222;
+      --text-color: #e6e6e6;
+      --text-muted: #aaa;
+      --border-color: #444;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      max-width: 900px;
-      margin: auto;
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.7;
       padding: 20px;
-      background: #fafafa;
-      color: #222;
+      background: var(--dark-bg);
+      color: var(--text-color);
       display: flex;
-      gap: 20px;
+      gap: 30px;
+      min-height: 100vh;
+      transition: var(--transition);
     }
 
-    #toc {
+    body.toc-hidden {
+      gap: 0;
+    }
+
+    /* Toggle TOC Button */
+    #toggle-toc {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    #toggle-toc:hover {
+      background: var(--primary-color);
+      color: var(--darker-bg);
+    }
+
+    /* Table of Contents */
+    #toc-container {
       position: sticky;
       top: 20px;
-      max-width: 250px;
+      width: 280px;
       max-height: 90vh;
       overflow-y: auto;
-      background: #fff;
-      padding: 1em;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      background: var(--card-bg);
+      padding: 1.5em;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
       font-size: 0.9em;
-      line-height: 1.4;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      line-height: 1.5;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      z-index: 999;
+      flex-shrink: 0;
     }
 
+    #toc-container.hidden {
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+
+    .toc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .toc-title {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+
+    /* Custom TOC Styling */
+    #custom-toc {
+      list-style: none;
+    }
+
+    #custom-toc ul {
+      list-style: none;
+      padding-left: 15px;
+    }
+
+    #custom-toc li {
+      margin: 8px 0;
+      position: relative;
+    }
+
+    #custom-toc a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      display: block;
+      padding: 5px 0;
+      border-left: 3px solid transparent;
+      padding-left: 10px;
+    }
+
+    #custom-toc a:hover {
+      color: var(--primary-color);
+      border-left-color: var(--primary-color);
+    }
+
+    #custom-toc a.active {
+      color: var(--primary-color);
+      font-weight: 600;
+      border-left-color: var(--primary-color);
+    }
+
+    /* Main Content Area */
     #post-content {
       flex: 1;
       min-width: 0;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      margin-left: 0;
     }
 
-    h1, h2, h3, h4 {
+    body.toc-hidden #post-content {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 900px;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
       font-weight: 600;
       line-height: 1.3;
-      margin-top: 1.2em;
-      margin-bottom: 0.6em;
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+      color: var(--secondary-color);
     }
+
     h1 {
-      border-bottom: 2px solid #ccc;
+      border-bottom: 2px solid var(--primary-color);
       padding-bottom: 0.3em;
+      margin-top: 0;
     }
 
+    h2 {
+      border-left: 4px solid var(--primary-color);
+      padding-left: 15px;
+    }
+
+    /* Blockquotes */
     blockquote {
-      border-left: 4px solid #888;
-      background: #f5f5f5;
-      padding: 0.8em 1.2em;
-      margin: 1.2em 0;
+      border-left: 4px solid var(--primary-color);
+      background: rgba(106, 176, 255, 0.1);
+      padding: 1.2em 1.5em;
+      margin: 1.5em 0;
       font-style: italic;
-      color: #444;
-      border-radius: 4px;
-    }
-    blockquote p {
-      margin: 0.3em 0;
+      color: var(--text-color);
+      border-radius: 0 8px 8px 0;
+      position: relative;
     }
 
+    blockquote:before {
+      content: "";
+      font-family: Georgia, serif;
+      font-size: 3em;
+      position: absolute;
+      left: 10px;
+      top: -10px;
+      color: var(--primary-color);
+      opacity: 0.3;
+    }
+
+    blockquote p {
+      margin: 0.5em 0;
+    }
+
+    /* Code Styling */
     code {
-      background: #f0f0f0;
-      padding: 2px 5px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2px 6px;
       border-radius: 4px;
-      font-size: 90%;
-      font-family: Consolas, monospace;
-      color: #c7254e;
+      font-size: 0.9em;
+      font-family: 'Fira Code', 'Consolas', monospace;
+      color: var(--accent-color);
+    }
+
+    pre {
+      background: #1a1a1a;
+      color: #e6e6e6;
+      padding: 1.2em;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9em;
+      font-family: 'Fira Code', 'Consolas', monospace;
+      margin: 1.5em 0;
+      box-shadow: var(--shadow);
+      position: relative;
+      border: 1px solid var(--border-color);
     }
 
     pre code {
@@ -96,65 +265,406 @@
       color: inherit;
       padding: 0;
     }
-    pre {
-      background: #2d2d2d;
-      color: #f8f8f2;
-      padding: 12px;
-      border-radius: 6px;
-      overflow-x: auto;
-      font-size: 90%;
-      font-family: Consolas, monospace;
-      margin: 1.2em 0;
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0;
+      transition: var(--transition);
     }
 
-    .MathJax_Display {
-      margin: 1em 0 !important;
+    pre:hover .copy-btn {
+      opacity: 1;
     }
 
+    .copy-btn:hover {
+      background: var(--primary-color);
+      color: var(--darker-bg);
+    }
+
+    /* Links */
     a {
-      color: #0066cc;
+      color: var(--primary-color);
       text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
     }
+
     a:hover {
+      color: var(--accent-color);
       text-decoration: underline;
     }
+
+    /* Tables */
     table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.2em 0;
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5em 0;
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
     }
 
     th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
+      border: 1px solid var(--border-color);
+      padding: 12px 15px;
       text-align: left;
     }
 
     th {
-      background-color: #f2f2f2;
+      background-color: rgba(106, 176, 255, 0.2);
+      color: var(--secondary-color);
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* MathJax Styling */
+    .MathJax_Display {
+      margin: 1.5em 0 !important;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+      }
+      
+      #toc-container {
+        position: relative;
+        width: 100%;
+        max-height: 300px;
+        top: 0;
+      }
+      
+      #toc-container.hidden {
+        transform: translateY(-100%);
+        width: 100%;
+        margin-bottom: 0;
+      }
+      
+      #post-content {
+        padding: 20px;
+      }
+      
+      #toggle-toc {
+        top: 10px;
+        left: 10px;
+      }
+      
+      body.toc-hidden #post-content {
+        margin-left: 0;
+        max-width: 100%;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #2d2d2d;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-color);
+    }
+
+    /* Footer Styling */
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.9em;
+    }
+
+    /* Navigation Styling */
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .site-title a {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: var(--secondary-color);
+    }
+
+    .site-nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Post Metadata */
+    .post-meta {
+      color: var(--text-muted);
+      font-size: 0.9em;
+      margin-bottom: 20px;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Homepage Specific */
+    .post-list {
+      list-style: none;
+    }
+
+    .post-list-item {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .post-list-title {
+      margin-bottom: 10px;
+    }
+
+    .post-list-excerpt {
+      color: var(--text-muted);
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
 
-  {% unless page.url == "/" %}
-  <nav id="toc"></nav>
-  {% endunless %}
+  <button id="toggle-toc" title="Toggle Table of Contents">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div id="toc-container">
+    <div class="toc-header">
+      <div class="toc-title">Table of Contents</div>
+    </div>
+    <div id="custom-toc"></div>
+  </div>
 
   <main id="post-content">
-    {{ content }}
-  </main>
+    <!-- Site Navigation -->
+    <nav class="site-nav">
+      <div class="site-title">
+        <a href="{{ site.baseurl }}/">{{ site.title }}</a>
+      </div>
+      <div class="site-nav-links">
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/about">About</a>
+        <a href="{{ site.baseurl }}/archive">Archive</a>
+      </div>
+    </nav>
 
-  <script src="https://unpkg.com/tocbot@4/dist/tocbot.min.js"></script>
+    <!-- Main Content -->
+    {% if page.url == "/" %}
+      <!-- Homepage Content -->
+      <h1>Latest Posts</h1>
+      
+      <ul class="post-list">
+        {% for post in site.posts limit:5 %}
+          <li class="post-list-item">
+            <h2 class="post-list-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            <div class="post-meta">
+              Published on {{ post.date | date: "%B %d, %Y" }}
+            </div>
+            <div class="post-list-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 30 }}
+            </div>
+            <a href="{{ post.url | relative_url }}">Read more →</a>
+          </li>
+        {% endfor %}
+      </ul>
+      
+      <div class="pagination">
+        <a href="{{ site.baseurl }}/archive">View all posts →</a>
+      </div>
+      
+    {% else %}
+      <!-- Post Content -->
+      <article>
+        <h1>{{ page.title }}</h1>
+        
+        <div class="post-meta">
+          {% if page.date %}
+            Published on {{ page.date | date: "%B %d, %Y" }}
+          {% endif %}
+          {% if page.author %}
+            by {{ page.author }}
+          {% endif %}
+        </div>
+        
+        {{ content }}
+      </article>
+      
+      <!-- Post Navigation -->
+      <div class="pagination">
+        {% if page.previous.url %}
+          <a href="{{ page.previous.url | relative_url }}">&larr; {{ page.previous.title }}</a>
+        {% endif %}
+        {% if page.next.url %}
+          <a href="{{ page.next.url | relative_url }}">{{ page.next.title }} &rarr;</a>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Powered by <a href="https://jekyllrb.com/">Jekyll</a>.</p>
+    </div>
+  </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      tocbot.init({
-        tocSelector: '#toc',
-        contentSelector: '#post-content',
-        headingSelector: 'h1, h2, h3, h4',
-        collapseDepth: 6,
-        scrollSmooth: true,
+      // Generate custom table of contents
+      function generateCustomToc() {
+        const tocContainer = document.getElementById('custom-toc');
+        const headings = document.querySelectorAll('#post-content h2, #post-content h3');
+        
+        // Only generate TOC if we're on a post page with headings
+        if (headings.length > 0 && !window.location.pathname.endsWith('/')) {
+          let tocHtml = '';
+          
+          headings.forEach(heading => {
+            const level = heading.tagName.substring(1); // Get heading level (2 or 3)
+            const id = heading.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            heading.id = id;
+            
+            if (level === '2') {
+              tocHtml += `<li><a href="#${id}" class="toc-link">${heading.textContent}</a></li>`;
+            } else if (level === '3') {
+              tocHtml += `<li><a href="#${id}" class="toc-link" style="padding-left: 20px;">${heading.textContent}</a></li>`;
+            }
+          });
+          
+          tocContainer.innerHTML = tocHtml;
+          
+          // Add click events to TOC links
+          const tocLinks = document.querySelectorAll('.toc-link');
+          tocLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetId = this.getAttribute('href').substring(1);
+              const targetElement = document.getElementById(targetId);
+              
+              if (targetElement) {
+                window.scrollTo({
+                  top: targetElement.offsetTop - 20,
+                  behavior: 'smooth'
+                });
+                
+                // Update active link
+                tocLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update URL hash without scrolling
+                history.pushState(null, null, '#' + targetId);
+              }
+            });
+          });
+        } else {
+          // Hide TOC container on homepage or pages without headings
+          document.getElementById('toc-container').classList.add('hidden');
+          document.body.classList.add('toc-hidden');
+          document.getElementById('toggle-toc').querySelector('i').classList.remove('fa-bars');
+          document.getElementById('toggle-toc').querySelector('i').classList.add('fa-chevron-right');
+        }
+      }
+      
+      // Initialize table of contents
+      generateCustomToc();
+      
+      // Toggle TOC visibility
+      const toggleTocBtn = document.getElementById('toggle-toc');
+      const tocContainer = document.getElementById('toc-container');
+      const body = document.body;
+      
+      toggleTocBtn.addEventListener('click', function() {
+        tocContainer.classList.toggle('hidden');
+        body.classList.toggle('toc-hidden');
+        
+        const icon = toggleTocBtn.querySelector('i');
+        if (tocContainer.classList.contains('hidden')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-chevron-right');
+        } else {
+          icon.classList.remove('fa-chevron-right');
+          icon.classList.add('fa-bars');
+        }
+      });
+      
+      // Add copy code functionality
+      document.querySelectorAll('pre').forEach(pre => {
+        const button = document.createElement('button');
+        button.className = 'copy-btn';
+        button.innerHTML = '<i class="fas fa-copy"></i>';
+        button.title = 'Copy code';
+        
+        button.addEventListener('click', function() {
+          const code = pre.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+              button.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          });
+        });
+        
+        pre.appendChild(button);
+      });
+      
+      // Update active TOC link on scroll
+      window.addEventListener('scroll', function() {
+        const headings = document.querySelectorAll('#post-content h2, #post-content h3');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        let currentActive = null;
+        
+        headings.forEach((heading) => {
+          const rect = heading.getBoundingClientRect();
+          if (rect.top <= 100) {
+            currentActive = heading.id;
+          }
+        });
+        
+        if (currentActive) {
+          tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentActive}`) {
+              link.classList.add('active');
+            }
+          });
+        }
       });
     });
   </script>
