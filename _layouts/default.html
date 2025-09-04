@@ -481,7 +481,6 @@
       <div class="site-nav-links">
         <a href="{{ site.baseurl }}/">Home</a>
         <a href="{{ site.baseurl }}/about">About</a>
-        <a href="{{ site.baseurl }}/archive">Archive</a>
       </div>
     </nav>
 
@@ -550,22 +549,19 @@
       // Generate custom table of contents
       function generateCustomToc() {
         const tocContainer = document.getElementById('custom-toc');
-        const headings = document.querySelectorAll('#post-content h2, #post-content h3');
+        const headings = document.querySelectorAll('#post-content h1, #post-content h2, #post-content h3, #post-content h4, #post-content h5, #post-content h6');
         
         // Only generate TOC if we're on a post page with headings
         if (headings.length > 0 && !window.location.pathname.endsWith('/')) {
           let tocHtml = '';
           
           headings.forEach(heading => {
-            const level = heading.tagName.substring(1); // Get heading level (2 or 3)
+            const level = heading.tagName.substring(1); // Get heading level (1-6)
             const id = heading.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
             heading.id = id;
             
-            if (level === '2') {
-              tocHtml += `<li><a href="#${id}" class="toc-link">${heading.textContent}</a></li>`;
-            } else if (level === '3') {
-              tocHtml += `<li><a href="#${id}" class="toc-link" style="padding-left: 20px;">${heading.textContent}</a></li>`;
-            }
+            // Add appropriate class based on heading level
+            tocHtml += `<li><a href="#${id}" class="toc-link toc-h${level}">${heading.textContent}</a></li>`;
           });
           
           tocContainer.innerHTML = tocHtml;
@@ -646,7 +642,7 @@
       
       // Update active TOC link on scroll
       window.addEventListener('scroll', function() {
-        const headings = document.querySelectorAll('#post-content h2, #post-content h3');
+        const headings = document.querySelectorAll('#post-content h1, #post-content h2, #post-content h3, #post-content h4, #post-content h5, #post-content h6');
         const tocLinks = document.querySelectorAll('.toc-link');
         let currentActive = null;
         
@@ -667,7 +663,7 @@
         }
       });
     });
-  </script>
+</script>
 
 </body>
 </html>
