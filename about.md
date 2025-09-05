@@ -3,4 +3,4 @@ layout: default
 title: About
 ---
 
-## sUNDER CONSTRUCTION
+## UNDER CONSTRUCTION

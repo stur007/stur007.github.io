@@ -3,8 +3,6 @@ layout: default
 title: All Posts
 ---
 
-# All Posts
-
 <!-- Search Box -->
 <div class="search-box">
   <i class="fas fa-search search-icon"></i>

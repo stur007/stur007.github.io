@@ -2,7 +2,7 @@
 layout: default
 title: "PhyForum: A Personal Flask Web Project"
 date: 2025-05-18
-categories: [projects, flask]
+categories: [projects]
 tags: [python, flask, web, personal-project]
 ---
 
