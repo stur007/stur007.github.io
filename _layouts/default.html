@@ -524,6 +524,144 @@
       color: var(--text-muted);
       margin-bottom: 10px;
     }
+    /* Home page specific styles */
+    .home-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .home-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .lead {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .featured-posts {
+      margin-bottom: 3rem;
+    }
+
+    .post-list {
+      display: grid;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .post-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .post-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-card h3 a {
+      color: var(--secondary-color);
+      text-decoration: none;
+    }
+
+    .post-card h3 a:hover {
+      color: var(--primary-color);
+    }
+
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.9em;
+      color: var(--text-muted);
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: rgba(106, 176, 255, 0.2);
+      color: var(--primary-color);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.8em;
+    }
+
+    .read-more {
+      display: inline-block;
+      color: var(--primary-color);
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: 0.5rem;
+    }
+
+    .read-more:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    .view-all {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .view-all a {
+      color: var(--primary-color);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .view-all a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    .home-footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    /* Responsive design for home page */
+    @media (max-width: 768px) {
+      .home-header h1 {
+        font-size: 2rem;
+      }
+      
+      .lead {
+        font-size: 1.1rem;
+      }
+      
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      
+      .tags {
+        flex-wrap: wrap;
+      }
+    }
   </style>
 </head>
 <body>
@@ -554,29 +692,40 @@
     <!-- Main Content -->
     {% if page.url == "/" %}
       <!-- Homepage Content -->
-      <h1>Latest Posts</h1>
-      
-      <ul class="post-list">
-        {% for post in site.posts limit:5 %}
-          <li class="post-list-item">
-            <h2 class="post-list-title">
-              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            </h2>
-            <div class="post-meta">
-              Published on {{ post.date | date: "%B %d, %Y" }}
-            </div>
-            <div class="post-list-excerpt">
-              {{ post.excerpt | strip_html | truncatewords: 30 }}
-            </div>
-            <a href="{{ post.url | relative_url }}">Read more →</a>
-          </li>
-        {% endfor %}
-      </ul>
-      
-      <div class="pagination">
-        <a href="{{ site.baseurl }}/posts">View all posts →</a>
+      <div class="home-header">
+        <h1>Hi, there 👋</h1>
+        <p class="lead">{{ site.description }}</p>
       </div>
-      
+
+      <section class="featured-posts">
+        <h2>📝 Latest Blog Posts</h2>
+        
+        <div class="post-list">
+          {% for post in site.posts limit:5 %}
+            <article class="post-card">
+              <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+              <div class="post-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+                {% if post.tags.size > 0 %}
+                  <span class="tags">
+                    {% for tag in post.tags limit:3 %}
+                      <span class="tag">#{{ tag }}</span>
+                    {% endfor %}
+                  </span>
+                {% endif %}
+              </div>
+              <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+              <a href="{{ post.url | relative_url }}" class="read-more">Read more →</a>
+            </article>
+          {% endfor %}
+        </div>
+        
+        {% if site.posts.size > 5 %}
+        <div class="view-all">
+          <a href="{{ site.baseurl }}/posts">View all {{ site.posts.size }} posts →</a>
+        </div>
+        {% endif %}
+      </section>            
     {% else %}
       <!-- Post Content -->
       <article>
