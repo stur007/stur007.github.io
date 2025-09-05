@@ -524,6 +524,54 @@
       color: var(--text-muted);
       margin-bottom: 10px;
     }
+      .search-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1.5rem 0;
+      }
+
+      .search-input {
+        width: 60%;
+        padding: 0.5rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.2s;
+      }
+
+      .search-input:focus {
+        border-color: #007acc;
+        box-shadow: 0 0 5px rgba(0, 122, 204, 0.4);
+      }
+      .filter-section {
+    margin: 1rem 0;
+  }
+
+      .filter-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+      }
+
+      .filter-item a {
+        display: inline-block;
+        padding: 0.3rem 0.7rem;
+        background: #f5f5f5;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        color: #333;
+        transition: background 0.2s;
+      }
+
+      .filter-item a:hover {
+        background: #007acc;
+        color: #fff;
+      }
     /* Home page specific styles */
     .home-header {
       text-align: center;
@@ -661,55 +709,6 @@
       .tags {
         flex-wrap: wrap;
       }
-      .search-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 1.5rem 0;
-      }
-
-      .search-input {
-        width: 60%;
-        padding: 0.5rem 1rem;
-        border: 1px solid #ccc;
-        border-radius: 25px;
-        font-size: 1rem;
-        outline: none;
-        transition: all 0.2s;
-      }
-
-      .search-input:focus {
-        border-color: #007acc;
-        box-shadow: 0 0 5px rgba(0, 122, 204, 0.4);
-      }
-      .filter-section {
-    margin: 1rem 0;
-  }
-
-      .filter-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        list-style: none;
-        padding: 0;
-      }
-
-      .filter-item a {
-        display: inline-block;
-        padding: 0.3rem 0.7rem;
-        background: #f5f5f5;
-        border-radius: 15px;
-        font-size: 0.9rem;
-        text-decoration: none;
-        color: #333;
-        transition: background 0.2s;
-      }
-
-      .filter-item a:hover {
-        background: #007acc;
-        color: #fff;
-      }
-
     }
   </style>
 </head>
