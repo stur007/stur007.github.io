@@ -3,8 +3,7 @@ layout: default
 title: All Posts
 ---
 
-<!-- Page Title -->
-<h1>All Posts</h1>
+# All Posts
 
 <!-- Search Box -->
 <div class="search-box">
