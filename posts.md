@@ -60,12 +60,6 @@ title: All Posts
       </h2>
       <div class="post-meta">
         Published on {{ post.date | date: "%B %d, %Y" }}
-        {% if post.categories.size > 0 %}
-          in 
-          {% for category in post.categories %}
-            <a href="#" onclick="filterPosts('category-{{ category | slugify }}'); return false;">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
-          {% endfor %}
-        {% endif %}
       </div>
       {% if post.tags.size > 0 %}
       <div class="post-tags">
