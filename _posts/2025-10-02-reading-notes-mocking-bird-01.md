@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Reading notes for To kill a mocking bird, Harper Lee (Chap 01)"
-date: 2025-9-4
+date: 2025-10-02
 categories: [literature/To kill a mocking bird]
 tags: [reading notes, To kill a mocking bird]
 ---
