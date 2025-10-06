@@ -10,7 +10,7 @@ Thesedays I'm learning about the (finite) group theory, and I'm going to record 
 
 # Group representation
 ## 1. Linear space and linear transformation
-When we first encounter the matrices, we usually put them naturally in the Euclidean space $\mathbb {R}^n$, and the elements of the vectors are the coordinates in the Cartesian coordinate system. However, when we broaden our horizon to the linear space where the bases can be any arbitrary set, we can transform our konwledge into a more general setting.
+When we first encounter the matrices, we usually put them naturally in the Euclidean space $\mathbb {R}^n$, and the elements of the vectors are the coordinates in the Cartesian coordinate system. However, when we broaden our horizon to the linear space where the bases can be any arbitrary set, we can transform our knowledge into a more general setting.
 
 A vector in a linear space $V$ defined over a number regime $K$ can be viewed as:
 
