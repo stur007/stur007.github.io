@@ -8,6 +8,8 @@ tags: [TV series review, Prison Break]
 
 This is not a commentary blog on the TV series, as I barely recall the complicated plots for all 5 seasons; nor is it a weekly report on my daily life, for it would be boring and tedious to share. Therefore, I determine to eleborate on the story with my thoughts about the classic TV series *Prison Break*, trying my best to think more deeply and live with a bit more humor.
 
+![20251019202024](https://raw.githubusercontent.com/stur007/img/main/img/20251019202024.png)
+
 Actually, I finished the last episode early this year, but at that time I was drowning in the endless ocean of final exam, occupied by the academic burden and unable keep track of my idea and actually I didn't have a strong feeling for it. These days, I happened to find some clips of this, and I reckon it's the right time to collect my feelings toward it. 
 
 Looking back, the main story line seems to be trivial now, but I was attracted when I first heard of it: The younger brother Michael Scofield believes his older brother Lincon Burrows who is accused of murdering somebody is innocent, so he intentionally commits a crime, making himself in the same prison of his brother, helping his brother escape from the Fox River Prison. Luckily this risky operation ends up successfully (the ending is almost definite or the people will tear the director into pieces if Lincoln died). At the first time watching I was truly zealous about the intense and thrilling scenes in it, and the filming skill is cinematography, just like the techniques used in a real film, but the following episodes are almost replay the same things over and over again, so there's no need to repeat them. 
