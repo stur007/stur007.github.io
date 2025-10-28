@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Some comments on *The Imitation Game*"
-date: 2025-10-14
+date: 2025-10-18
 categories: [movies&TVseries]
 tags: [movie review, The Imitation Game]
 ---
