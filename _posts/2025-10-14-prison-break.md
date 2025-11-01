@@ -20,7 +20,7 @@ And now back to my own experience. The previous weekend almost wore me out, I ha
 
 ---
 
-> ai-aided vetrsion 
+> ai-aided version 
 
 # Reflections on Prison Break
 
