@@ -128,6 +128,12 @@ $$
 
 主要抓住基的选取和向量、变换之间的关系即可。这一部分在上面的链接中有比较好的讨论，直观的理解：
 
+![discussion_page-0001](https://raw.githubusercontent.com/stur007/img/main/img/discussion_page-0001.jpg)
+
+![discussion_page-0002](https://raw.githubusercontent.com/stur007/img/main/img/discussion_page-0002.jpg)
+
+![discussion_page-0003](https://raw.githubusercontent.com/stur007/img/main/img/discussion_page-0003.jpg)
+
 ## 线性空间的内积
 
 内积的定义方式有很多种，只要满足内积的要求即可（主要是一个半线性）。但是一般这里常用的内积定义方式是，
@@ -233,6 +239,18 @@ $$
 > 前一个命题的证明：如果同构，那么不可约表示相同；如果不可约表示相同，使用反证法，那么不可能所有的表示都相同（至少有忠实表示），但是不可约表示相同，所以正则表示也相同或者差一个相似变换，那么两个群同构，矛盾！后一个可以举出反例，这是比较明确的($D_4$ <mark>可以做半直积分解</mark> 和 $Q_8$)。
 
 ## 附录：定理的证明
+
+![Group Theory Proof of the theorems in Chap 2_page-0001](https://raw.githubusercontent.com/stur007/img/main/img/Group%20Theory%20Proof%20of%20the%20theorems%20in%20Chap%202_page-0001.jpg)
+
+![Group Theory Proof of the theorems in Chap 2_page-0002](https://raw.githubusercontent.com/stur007/img/main/img/Group%20Theory%20Proof%20of%20the%20theorems%20in%20Chap%202_page-0002.jpg)
+
+![Group Theory Proof of the theorems in Chap 2_page-0003](https://raw.githubusercontent.com/stur007/img/main/img/Group%20Theory%20Proof%20of%20the%20theorems%20in%20Chap%202_page-0003.jpg)
+
+![Group Theory Proof of the theorems in Chap 2_page-0004](https://raw.githubusercontent.com/stur007/img/main/img/Group%20Theory%20Proof%20of%20the%20theorems%20in%20Chap%202_page-0004.jpg)
+
+![Group Theory Proof of the theorems in Chap 2_page-0005](https://raw.githubusercontent.com/stur007/img/main/img/Group%20Theory%20Proof%20of%20the%20theorems%20in%20Chap%202_page-0005.jpg)
+
+![Group Theory Proof of the theorems in Chap 2_page-0006](https://raw.githubusercontent.com/stur007/img/main/img/Group%20Theory%20Proof%20of%20the%20theorems%20in%20Chap%202_page-0006.jpg)
 
 # 点群和空间群
 
