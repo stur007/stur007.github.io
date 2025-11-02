@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Mid-Term Review For Group Theory"
-date: 2025-10-04
+date: 2025-11-02
 categories: [group theory]
 tags: [group theory]
 ---
