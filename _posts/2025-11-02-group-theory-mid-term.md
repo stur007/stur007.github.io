@@ -120,6 +120,17 @@ $$
 
 > 注意这里的同态映射不要求是满射，如果$G_2$被映射为了$G_1$的自同构群中的单位元素，那么这就是直积。同时这也反映出半直积分解一般不是唯一的。
 
+> 讨论: 如何理解半直积的关系?
+>
+> 其实在定义的时候可以反过来,这也是等价的。对于群$G$，存在固有子群（不变子群）$N$ 和子群 $H$，只要满足两群相乘得到的是G，两个子群的交集为单位元素即可。如果子群H也是固有子群，那么半直积就变成了直积关系。构造的方式是简单的：
+> $$
+> <n_1 h_1><n_2 h_2>=<n_1 h_1n_2h_1^{-1}><h_1 h_2>
+> $$
+>
+> 这里也可以看出要求子群N是固有子群的理由。这个解释似乎“狭义”了一些，但是更加实用。参考，[半直积的理解](https://www.zhihu.com/question/511273235/answer/2807952796?share_code=xSHZC7qq6z1o&utm_psn=1969133140959290460)
+
+> 另外还有值得注意的地方，就是点群中判断一个可以“转过去”的轴是否在群中。其实还是比较明确的，问题就是，已知$O C_{\vec k}(\Psi ) O^{-1} \in G$, 一定存在$O^\prime C_{\vec k}(\Psi) = C_{O \vec k}(\Psi)$. 借助固有子群的性质是显然的。
+
 # 群的表示理论
 
 这一部分的内容比较抽象，一些比较严谨的讨论在[group representation](https://stur007.github.io/group%20theory/2025/10/04/group-representation.html)中。主要的想法是，用一套统一的语言（线性代数）表示群之间的关系，用抽象的变换代替具体的群元（用数字3代表三个苹果）。此外，同构线性代数的性质可以得到群之间的性质，这是我们感兴趣的点。
@@ -254,8 +265,15 @@ $$
 
 # 点群和空间群
 
-这一部分的讨论比较简单，参见后面的附页。
+这一部分的讨论比较机械，参见后面的附页。
 
 ![group_theory_cheatsheet_page-0001](https://raw.githubusercontent.com/stur007/img/main/img/group_theory_cheatsheet_page-0001.jpg)
 
 ![group_theory_cheatsheet_page-0002](https://raw.githubusercontent.com/stur007/img/main/img/group_theory_cheatsheet_page-0002.jpg)
+
+> 另外，书上的极射赤面投影图错误很多，参考[极射赤面投影图](https://www.zhihu.com/question/433801434?share_code=pt1zj3DtvCzr&utm_psn=1969146350881969858)。
+> ![7d45e6908140aab50da87aa58fd98f2a](https://raw.githubusercontent.com/stur007/img/main/img/7d45e6908140aab50da87aa58fd98f2a.jpg)
+
+> # Reference
+> 
+> 李新征，《群论及其在凝聚态物理中的应用》，第二版。
