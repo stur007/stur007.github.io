@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Miscellany"
-date: 2026-03-08
+date: 2026-03-15
 categories: [miscellany in March]
 tags: [miscellany, Holmes]
 ---
